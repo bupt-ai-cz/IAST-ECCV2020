@@ -1,0 +1,35 @@
+MODEL:
+  BACKBONE:
+    TYPE: "R-DL-101-C1-C5"
+    PRETRAINED: True
+  DECODER:
+    TYPE: "DeepLabV2Dedoder"
+  PREDICTOR:
+    TYPE: "UpsamplePredictor"
+    NUM_CLASSES: 19
+    LOSS: "CrossEntropy"
+TRAIN:
+  ITER_VAL: 800
+  EPOCHES: 8
+  OPTIMIZER: "Adam"
+  LR: 0.0001
+  BATCHSIZE: 2
+  ITER_REPORT: 100
+  SCHEDULER: "CosineAnnealingLR_with_Restart"
+  COSINEANNEALINGLR:
+    T_MAX: 8
+    T_MULT: 1.0
+  SAVE_ALL: False
+DATASET:
+  TYPE: "MsGTAVDataset"
+  ANNS: "../data/gtav_train.json"
+  IMAGEDIR: "../data/GTA5"
+  USE_AUG: True
+  VAL:
+    TYPE: "CityscapesDataset"
+    ANNS: "../data/cityscapes_val.json"
+    IMAGEDIR: "../data/cityscapes"
+    RESIZE_SIZE: [1024, 512]
+TEST:
+  RESIZE_SIZE: [[1024, 512]]
+WORK_DIR: "../t4_log/gta5/task5/source_only"

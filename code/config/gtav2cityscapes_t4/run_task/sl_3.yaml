@@ -1,0 +1,49 @@
+MODEL:
+  TYPE: "SL_UDA_Segmentor"
+  BACKBONE:
+    TYPE: "R-DL-101-C1-C5-FREEZEBN"
+    PRETRAINED: True
+  DECODER:
+    TYPE: "DeepLabV2Dedoder"
+  PREDICTOR:
+    TYPE: "UpsamplePredictor"
+    NUM_CLASSES: 19
+    LOSS: "CrossEntropy"
+  DISCRIMINATOR:
+    LAMBDA_KLDREG_WEIGHT: 0.1
+    LAMBDA_ENTROPY_WEIGHT: 3.0
+TRAIN:
+  ITER_VAL: 800
+  EPOCHES: 2
+  OPTIMIZER: "Adam"
+  LR: 0.00002
+  BATCHSIZE: 2
+  ITER_REPORT: 100
+  SAVE_ALL: False
+  SCHEDULER: "CosineAnnealingLR_with_Restart"
+  COSINEANNEALINGLR:
+    T_MAX: 3
+    T_MULT: 1.0
+DATASET:
+  TYPE: "MsGTAVDataset"
+  ANNS: "../data/gtav_train.json"
+  IMAGEDIR: "../data/GTA5"
+  USE_AUG: True
+  VAL:
+    TYPE: "CityscapesDataset"
+    ANNS: "../data/cityscapes_val.json"
+    IMAGEDIR: "../data/cityscapes"
+    RESIZE_SIZE: [1536, 768]
+  TARGET:
+    TYPE: "MsCityscapesDataset"
+    ANNS: "../data/cityscapes_train.json"
+    IMAGEDIR: "../data/cityscapes"
+    PSEUDO_SIZE: [1536, 768]
+    PSEUDO_PL: "IAST"
+    PSEUDO_PL_ALPHA: 0.3
+    PSEUDO_PL_GAMMA: 8.0
+    PSEUDO_LOSS_WEIGHT: 1.0
+    SOURCE_LOSS_WEIGHT: .0
+TEST:
+  RESIZE_SIZE: [[1024, 512], [1280, 640], [1536, 768], [1800, 900], [2048, 1024]]
+WORK_DIR: "../t4_log/gta5/task5/sl_3"

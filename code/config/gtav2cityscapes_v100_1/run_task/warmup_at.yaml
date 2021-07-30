@@ -1,0 +1,45 @@
+MODEL:
+  TYPE: "UDA_Segmentor"
+  BACKBONE:
+    TYPE: "R-DL-101-C1-C5-FREEZEBN"
+    PRETRAINED: True
+  DECODER:
+    TYPE: "DeepLabV2Dedoder"
+  PREDICTOR:
+    TYPE: "UpsamplePredictor"
+    NUM_CLASSES: 19
+    LOSS: "CrossEntropy"
+  DISCRIMINATOR:
+    TYPE: ["Origin-Predictor",]
+    WEIGHT: [0.05,]
+    LR: [0.00002]
+    LOSS: "MSELoss"
+TRAIN:
+  ITER_VAL: 400
+  EPOCHES: 4
+  OPTIMIZER: "Adam"
+  LR: 0.00002
+  BATCHSIZE: 4
+  ITER_REPORT: 100
+  SCHEDULER: "CosineAnnealingLR_with_Restart"
+  COSINEANNEALINGLR:
+    T_MAX: 4
+    T_MULT: 1.0
+  SAVE_ALL: False
+DATASET:
+  TYPE: "MsGTAVDataset"
+  ANNS: "../data/gtav_train.json"
+  IMAGEDIR: "../data/GTA5"
+  USE_AUG: True
+  VAL:
+    TYPE: "CityscapesDataset"
+    ANNS: "../data/cityscapes_val.json"
+    IMAGEDIR: "../data/cityscapes"
+    RESIZE_SIZE: [1280, 640]
+  TARGET:
+    TYPE: "MsCityscapesDataset"
+    ANNS: "../data/cityscapes_train.json"
+    IMAGEDIR: "../data/cityscapes"
+TEST:
+  RESIZE_SIZE: [[1280, 640]]
+WORK_DIR: "../v100_log/gta5/task5/warmup_at"

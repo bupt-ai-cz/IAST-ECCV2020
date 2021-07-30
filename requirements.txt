@@ -1,0 +1,8 @@
+albumentations
+opencv-python
+numpy
+yacs
+Pillow
+cython
+tqdm
+PyYAML
