@@ -1,7 +1,5 @@
 # IAST: Instance Adaptive Self-training for Unsupervised Domain Adaptation (ECCV 2020) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Codes%20and%20Data%20for%20Our%20Paper:%20"Instance%20Adaptive%20Self-training%20for%20Unsupervised%20Domain%20Adaptation"%20&url=https://github.com/bupt-ai-cz/IAST)
-This repo is the official implementation of our paper ["Instance Adaptive Self-training for Unsupervised Domain Adaptation"](https://arxiv.org/abs/2008.12197)
-
-The purpose of this repo is to better communicate with you and respond to your questions. This repo is almost the same with [Another-Version](https://github.com/Raykoooo/IAST), and you can also refer to that version. 
+This repo is the official implementation of our paper ["Instance Adaptive Self-training for Unsupervised Domain Adaptation"](https://arxiv.org/abs/2008.12197). The purpose of this repo is to better communicate with you and respond to your questions. This repo is almost the same with [Another-Version](https://github.com/Raykoooo/IAST), and you can also refer to that version. 
 
 ## Introduction
 
